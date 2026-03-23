@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────
+   Primitive palette
+   ────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --color-brand-50:   #eff6ff;
+  --color-brand-100:  #dbeafe;
+  --color-brand-200:  #bfdbfe;
+  --color-brand-500:  #3b82f6;
+  --color-brand-600:  #2563eb;
+  --color-brand-700:  #1d4ed8;
+
+  /* Neutral */
+  --color-neutral-50:  #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+
+  /* Status */
+  --color-green-50:  #f0fdf4;
+  --color-green-600: #16a34a;
+  --color-red-50:    #fef2f2;
+  --color-red-600:   #dc2626;
+  --color-amber-50:  #fffbeb;
+  --color-amber-600: #d97706;
+
+  /* ──────────────────────────────────────────
+     Semantic tokens (what components use)
+     ────────────────────────────────────────── */
+  --background:    var(--color-neutral-50);
+  --surface:       #ffffff;
+  --surface-alt:   var(--color-neutral-100);
+  --border:        var(--color-neutral-200);
+  --text-primary:  var(--color-neutral-900);
+  --text-secondary:var(--color-neutral-500);
+  --accent:        var(--color-brand-600);
+  --accent-hover:  var(--color-brand-700);
+  --accent-light:  var(--color-brand-50);
+  --status-read:   var(--color-green-600);
+  --status-unread: var(--color-amber-600);
+  --status-error:  var(--color-red-600);
+
+  /* Layout */
+  --sidebar-width:  240px;
+  --topbar-height:  56px;
+
+  /* Radii */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+}
+
+@theme inline {
+  --color-background:  var(--background);
+  --color-surface:     var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-border:      var(--border);
+  --color-text-primary:  var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent:      var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-light: var(--accent-light);
+  --color-status-read:   var(--status-read);
+  --color-status-unread: var(--status-unread);
+  --color-status-error:  var(--status-error);
+  --color-neutral-900: var(--color-neutral-900);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* DOCX rendered HTML styles */
+.policy-docx-body h1 { font-size: 1.5rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: var(--text-primary); }
+.policy-docx-body h2 { font-size: 1.25rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: var(--text-primary); }
+.policy-docx-body h3 { font-size: 1.1rem; font-weight: 600; margin: 1rem 0 0.5rem; color: var(--text-primary); }
+.policy-docx-body p  { margin: 0.5rem 0; line-height: 1.75; color: var(--text-primary); font-size: 0.9rem; }
+.policy-docx-body ul, .policy-docx-body ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+.policy-docx-body li { margin: 0.25rem 0; line-height: 1.6; font-size: 0.9rem; }
+.policy-docx-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.policy-docx-body th, .policy-docx-body td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; font-size: 0.875rem; }
+.policy-docx-body th { background: var(--surface-alt); font-weight: 600; }

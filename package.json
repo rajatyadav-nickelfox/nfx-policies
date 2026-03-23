@@ -1,0 +1,51 @@
+{
+  "name": "nfx-policies",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "next": "^15.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next-auth": "5.0.0-beta.30",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
+    "@supabase/supabase-js": "^2.49.0",
+    "@supabase/ssr": "^0.5.2",
+    "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/toolbar": "^3.12.0",
+    "pdfjs-dist": "^3.11.174",
+    "mammoth": "^1.8.0",
+    "dompurify": "^3.2.4",
+    "jsdom": "^26.1.0",
+    "zustand": "^5.0.0",
+    "@tanstack/react-query": "^5.76.1",
+    "react-hook-form": "^7.55.0",
+    "@hookform/resolvers": "^5.0.1",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/dompurify": "^3.0.5",
+    "@types/jsdom": "^21.1.7",
+    "tailwindcss": "^4.1.4",
+    "@tailwindcss/postcss": "^4.1.4",
+    "eslint": "^9.24.0",
+    "eslint-config-next": "^15.3.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0"
+  }
+}
