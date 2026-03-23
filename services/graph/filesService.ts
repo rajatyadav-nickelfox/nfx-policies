@@ -2,14 +2,29 @@ import { env } from '@/lib/env';
 import { getGraphClient } from './graphClient';
 import type { GraphDriveItem } from '@/types/policy';
 
-const SITE_ID = env.SHAREPOINT_SITE_ID;
-const DRIVE_ID = env.SHAREPOINT_DRIVE_ID;
-const FOLDER_ID = env.SHAREPOINT_FOLDER_ID;
+function encodeShareUrl(url: string): string {
+  return `u!${Buffer.from(url).toString('base64url')}`;
+}
+
+let resolvedFolder: { driveId: string; itemId: string } | null = null;
+
+async function getResolvedFolder(): Promise<{ driveId: string; itemId: string }> {
+  if (resolvedFolder) return resolvedFolder;
+  const client = await getGraphClient();
+  const shareId = encodeShareUrl(env.SHAREPOINT_FOLDER_URL);
+  const item = await client
+    .api(`/shares/${shareId}/driveItem`)
+    .select('id,parentReference')
+    .get() as { id: string; parentReference: { driveId: string } };
+  resolvedFolder = { driveId: item.parentReference.driveId, itemId: item.id };
+  return resolvedFolder;
+}
 
 export async function listPoliciesFromSharePoint(): Promise<GraphDriveItem[]> {
   const client = await getGraphClient();
+  const shareId = encodeShareUrl(env.SHAREPOINT_FOLDER_URL);
   const response = await client
-    .api(`/sites/${SITE_ID}/drives/${DRIVE_ID}/items/${FOLDER_ID}/children`)
+    .api(`/shares/${shareId}/driveItem/children`)
     .select('id,name,file,size,lastModifiedDateTime,eTag,webUrl')
     .filter('file ne null')
     .get() as { value?: GraphDriveItem[] };
@@ -17,9 +32,10 @@ export async function listPoliciesFromSharePoint(): Promise<GraphDriveItem[]> {
 }
 
 export async function getFileDownloadUrl(itemId: string): Promise<string> {
+  const { driveId } = await getResolvedFolder();
   const client = await getGraphClient();
   const item = await client
-    .api(`/sites/${SITE_ID}/drives/${DRIVE_ID}/items/${itemId}`)
+    .api(`/drives/${driveId}/items/${itemId}`)
     .select('id,name,file,@microsoft.graph.downloadUrl')
     .get() as GraphDriveItem;
 
@@ -29,9 +45,10 @@ export async function getFileDownloadUrl(itemId: string): Promise<string> {
 }
 
 export async function getFileMimeType(itemId: string): Promise<string> {
+  const { driveId } = await getResolvedFolder();
   const client = await getGraphClient();
   const item = await client
-    .api(`/sites/${SITE_ID}/drives/${DRIVE_ID}/items/${itemId}`)
+    .api(`/drives/${driveId}/items/${itemId}`)
     .select('file')
     .get() as GraphDriveItem;
   return item.file?.mimeType ?? 'application/octet-stream';

@@ -44,9 +44,26 @@ export function PolicyList() {
 
   const unread = policies.filter((p) => !p.acknowledged);
   const read = policies.filter((p) => p.acknowledged);
+  const total = policies.length;
+  const percent = total > 0 ? Math.round((read.length / total) * 100) : 0;
 
   return (
     <>
+      <div className="mb-6 rounded-[var(--radius-lg)] border border-border bg-surface p-4">
+        <div className="mb-2 flex items-center justify-between text-sm">
+          <span className="font-medium text-text-primary">Compliance Progress</span>
+          <span className="text-text-secondary">{read.length} / {total} acknowledged</span>
+        </div>
+        <div className="h-2 overflow-hidden rounded-full bg-surface-alt">
+          <div
+            className="h-full rounded-full bg-accent transition-all duration-500"
+            style={{ width: `${percent}%` }}
+          />
+        </div>
+        {percent === 100 && (
+          <p className="mt-2 text-xs font-medium text-status-read">All policies acknowledged!</p>
+        )}
+      </div>
       <div className="space-y-8">
         {unread.length > 0 && (
           <section>

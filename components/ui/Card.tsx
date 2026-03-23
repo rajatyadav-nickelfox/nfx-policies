@@ -10,8 +10,8 @@ export function Card({ children, className = '', onClick }: CardProps) {
       onClick={onClick}
       className={[
         'rounded-[var(--radius-lg)] border border-border bg-surface p-6 shadow-sm',
-        'transition-shadow duration-150',
-        onClick ? 'cursor-pointer hover:shadow-md' : '',
+        'transition-all duration-150',
+        onClick ? 'cursor-pointer hover:-translate-y-0.5 hover:shadow-md' : '',
         className,
       ].join(' ')}
     >
