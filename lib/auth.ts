@@ -12,7 +12,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       authorization: {
         params: {
           scope:
-            'openid profile email offline_access User.Read Files.Read.All Sites.Read.All',
+            'openid profile email offline_access User.Read Files.Read',
         },
       },
     }),
